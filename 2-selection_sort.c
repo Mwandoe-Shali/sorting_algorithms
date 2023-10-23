@@ -1,10 +1,10 @@
 #include "sort.h"
 
 /*
- * selection_sort - Sorta an array using the Selection Sort Algorithm
- * @array: The array to be sorted.
- * @size: The size of the array.
- */
+* selection_sort - Sorta an array using the Selection Sort Algorithm
+* @array: The array to be sorted.
+* @size: The size of the array.
+*/
 void selection_sort(int *array, size_t size)
 {
 	int temp;
