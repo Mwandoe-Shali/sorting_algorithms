@@ -35,7 +35,7 @@ void quick_sort_recursive(int *array, int low, int high, size_t size);
 
 /* Cocktail Sort Helper Functions. */
 void swap_nodes(listint_t **list, listint_t *node1, listint_t *node2);
-void fwd_pass(listint_t **list, listint_t *start, listint_t *end, int *swapped);
-void back_pass(listint_t **list, listint_t *start, listint_t *end, int *swapped);
+void fwd_pass(listint_t **list, listint_t *start, listint_t *end, int *swap);
+void back_pass(listint_t **list, listint_t *start, listint_t *end, int *swap);
 
 #endif /* SORT_H */
