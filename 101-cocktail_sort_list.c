@@ -8,21 +8,21 @@
  */
 void swap_nodes(listint_t **list, listint_t *node1, listint_t *node2)
 {
-    listint_t *tmp = node2->next;
+	listint_t *tmp = node2->next;
 
-    if (node1->prev)
-        node1->prev->next = node2;
-    else
-        *list = node2;
+	if (node1->prev)
+		node1->prev->next = node2;
+	else
+		*list = node2;
 
-    if (node2->next)
-        node2->next->prev = node1;
+	if (node2->next)
+		node2->next->prev = node1;
 
-    node1->next = tmp;
-    node2->next = node1;
-    node1->prev = node2;
-    if (tmp)
-        tmp->prev = node1;
+	node1->next = tmp;
+	node2->next = node1;
+	node1->prev = node2;
+	if (tmp)
+		tmp->prev = node1;
 }
 
 /**
@@ -34,20 +34,20 @@ void swap_nodes(listint_t **list, listint_t *node1, listint_t *node2)
  */
 void forward_pass(listint_t **list, listint_t *start, listint_t *end, int *swapped)
 {
-    int swapped_local = 0;
-    listint_t *current = *list;
+	int swapped_local = 0;
+	listint_t *current = *list;
 
-    while (current->next != end)
-    {
-        if (current->n > current->next->n)
-        {
-            swap_nodes(list, current);
-            swapped_local = 1;
-        }
-        current = current->next;
-    }
+	while (current->next != end)
+	{
+		if (current->n > current->next->n)
+		{
+			swap_nodes(list, current);
+			swapped_local = 1;
+		}
+		current = current->next;
+	}
 
-    *swapped = swapped_local;
+	*swapped = swapped_local;
 }
 
 /**
@@ -59,20 +59,20 @@ void forward_pass(listint_t **list, listint_t *start, listint_t *end, int *swapp
  */
 void backward_pass(listint_t **list, listint_t *start, listint_t *end, int *swapped)
 {
-    int swapped_local = 0;
-    listint_t *current = end;
+	int swapped_local = 0;
+	listint_t *current = end;
 
-    while (current->prev != start)
-    {
-        if (current->n < current->prev->n)
-        {
-            swap_nodes(list, current);
-            swapped_local = 1;
-        }
-        current = current->prev;
-    }
+	while (current->prev != start)
+	{
+		if (current->n < current->prev->n)
+		{
+			swap_nodes(list, current);
+			swapped_local = 1;
+		}
+		current = current->prev;
+	}
 
-    *swapped = swapped_local;
+	*swapped = swapped_local;
 }
 
 /**
@@ -82,27 +82,27 @@ void backward_pass(listint_t **list, listint_t *start, listint_t *end, int *swap
  */
 void cocktail_sort_list(listint_t **list)
 {
-    listint_t *start, *end;
-    int swapped;
+	listint_t *start, *end;
+	int swapped;
 
-    if (!list || !*list || !(*list)->next)
-        return;
+	if (!list || !*list || !(*list)->next)
+		return;
 
-    start = NULL;
-    end = NULL;
-    swapped = 1;
+	start = NULL;
+	end = NULL;
+	swapped = 1;
 
-    while (swapped)
-    {
-        swapped = 0;
-        forward_pass(list, start, end, &swapped);
+	while (swapped)
+	{
+		swapped = 0;
+		forward_pass(list, start, end, &swapped);
 
-        if (!swapped)
-            break;
+		if (!swapped)
+			break;
 
-        swapped = 0;
-        end = *list;
-        backward_pass(list, start, end, &swapped);
-        start = end;
-    }
+		swapped = 0;
+		end = *list;
+		backward_pass(list, start, end, &swapped);
+		start = end;
+	}
 }
