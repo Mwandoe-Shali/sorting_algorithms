@@ -26,13 +26,13 @@ void swap_nodes(listint_t **list, listint_t *node1, listint_t *node2)
 }
 
 /**
- * forward_pass - Performs the forward pass of the Cocktail Shaker sort.
+ * fwd_pass - Performs the forward pass of the Cocktail Shaker sort.
  * @list: A pointer to a pointer to the head of the list.
  * @start: The starting node for the pass.
  * @end: The ending node for the pass.
- * @swapped: A pointer to a flag indicating if any swaps were made.
+ * @swap: A pointer to a flag indicating if any swaps were made.
  */
-void forward_pass(listint_t **list, listint_t *start, listint_t *end, int *swapped)
+void fwd_pass(listint_t **list, listint_t *start, listint_t *end, int *swap)
 {
 	int swapped_local = 0;
 	listint_t *current = *list;
@@ -47,17 +47,17 @@ void forward_pass(listint_t **list, listint_t *start, listint_t *end, int *swapp
 		current = current->next;
 	}
 
-	*swapped = swapped_local;
+	*swap = swapped_local;
 }
 
 /**
- * backward_pass - Performs the backward pass of the Cocktail Shaker sort.
+ * back_pass - Performs the backward pass of the Cocktail Shaker sort.
  * @list: A pointer to a pointer to the head of the list.
  * @start: The starting node for the pass.
  * @end: The ending node for the pass.
- * @swapped: A pointer to a flag indicating if any swaps were made.
+ * @swap: A pointer to a flag indicating if any swaps were made.
  */
-void backward_pass(listint_t **list, listint_t *start, listint_t *end, int *swapped)
+void back_pass(listint_t **list, listint_t *start, listint_t *end, int *swap)
 {
 	int swapped_local = 0;
 	listint_t *current = end;
@@ -72,7 +72,7 @@ void backward_pass(listint_t **list, listint_t *start, listint_t *end, int *swap
 		current = current->prev;
 	}
 
-	*swapped = swapped_local;
+	*swap = swapped_local;
 }
 
 /**
@@ -95,14 +95,14 @@ void cocktail_sort_list(listint_t **list)
 	while (swapped)
 	{
 		swapped = 0;
-		forward_pass(list, start, end, &swapped);
+		fwd_pass(list, start, end, &swapped);
 
 		if (!swapped)
 			break;
 
 		swapped = 0;
 		end = *list;
-		backward_pass(list, start, end, &swapped);
+		back_pass(list, start, end, &swapped);
 		start = end;
 	}
 }
